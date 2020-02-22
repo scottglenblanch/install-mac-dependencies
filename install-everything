@@ -1,6 +1,11 @@
 #!/bin/bash
 
 source ./install-brew
+
+# languages
 source ./install-python
 source ./install-java
 source ./install-node
+
+# editors
+source ./install-atom
