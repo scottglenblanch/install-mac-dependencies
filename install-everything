@@ -10,5 +10,9 @@ source ./install-node
 # frameworks
 source ./install-android
 
+# tools
+source ./install-hammerspoon
+source ./install-spectacle
+
 # editors
 source ./install-atom
