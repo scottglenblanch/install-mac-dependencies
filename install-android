@@ -1,0 +1,10 @@
+#!/bin/bash
+
+brew install ant
+brew install maven
+brew install gradle
+brew install android-sdk
+brew install android-ndk
+
+# editor
+brew cask install android-studio
