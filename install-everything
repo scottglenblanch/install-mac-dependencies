@@ -1,5 +1,6 @@
 #!/bin/bash
 
 source ./install-brew
+source ./install-python
 source ./install-java
 source ./install-node

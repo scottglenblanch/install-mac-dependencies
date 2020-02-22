@@ -1,0 +1,8 @@
+#!/bin/bash
+
+brew update
+brew install pyenv
+
+exec "$SHELL"
+
+pyenv install 2.7.8
