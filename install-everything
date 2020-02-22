@@ -7,5 +7,8 @@ source ./install-python
 source ./install-java
 source ./install-node
 
+# frameworks
+source ./install-android
+
 # editors
 source ./install-atom
