@@ -1,0 +1,4 @@
+#!/bin/bash
+
+source ./install-brew
+source ./install-java
