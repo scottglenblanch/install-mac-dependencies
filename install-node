@@ -1,0 +1,26 @@
+#!/bin/bash
+
+# version list
+NODE_VERSION_LIST=()
+NODE_VERSION_LIST+=('node')
+NODE_VERSION_LIST+=('6')
+NODE_VERSION_LIST+=('7')
+NODE_VERSION_LIST+=('8')
+NODE_VERSION_LIST+=('9')
+NODE_VERSION_LIST+=('10')
+NODE_VERSION_LIST+=('12')
+NODE_VERSION_LIST+=('13')
+
+# install nvm
+export NVM_DIR="$HOME/.nvm" && (
+  git clone https://github.com/nvm-sh/nvm.git "$NVM_DIR"
+  cd "$NVM_DIR"
+  git checkout `git describe --abbrev=0 --tags --match "v[0-9]*" $(git rev-list --tags --max-count=1)`
+) && \. "$NVM_DIR/nvm.sh"
+
+# install node versions
+for NODE_VERSION in ${NODE_VERSION_LIST[@]}
+do
+    nvm install ${NODE_VERSION}
+done
+

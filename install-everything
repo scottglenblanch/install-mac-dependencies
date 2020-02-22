@@ -2,3 +2,4 @@
 
 source ./install-brew
 source ./install-java
+source ./install-node
