@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+
+# You must source this script inside of another one.
+# It will exit if there is a missing dependency.
+# Call it like:
+#   . require-dependencies [quiet] dep1 dep2 ...
+
+QUIET=""
+
+# Don't say something failed
+if [[ "$1" == "quiet" ]]; then
+  QUIET="true"
+  shift
+fi
+
+# So that you can call this script with:
+#   . require-dependencies -- quiet
+# Where quiet is a dependency you want to check.
+if [[ "$1" == "--" ]]; then
+  shift
+fi
+
+while test $# -gt 0; do
+  which $1 &>/dev/null
+  if [[ $? -ne 0 ]]; then
+    [[ -z "$QUIET" ]] && echo "Required Dependency: $1 not found."
+    exit 1
+  fi
+  shift
+done

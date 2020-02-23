@@ -6,6 +6,7 @@ source ./install-brew
 source ./install-python
 source ./install-java
 source ./install-node
+source ./install-rbenv
 
 # java web tools
 source ./install-maven
@@ -16,6 +17,7 @@ source ./install-android
 # tools
 source ./install-hammerspoon
 source ./install-spectacle
+source ./install-cloudapp
 
 # editors
 source ./install-atom
