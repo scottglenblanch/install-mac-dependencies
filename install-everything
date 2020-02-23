@@ -7,6 +7,9 @@ source ./install-python
 source ./install-java
 source ./install-node
 
+# java web tools
+source ./install-maven
+
 # frameworks
 source ./install-android
 
