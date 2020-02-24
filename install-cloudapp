@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+SCRIPT_PATH="$( cd "$(dirname "$0")" ; pwd -P )"
+cd $SCRIPT_PATH
+
+. get-confirmation "CloudApp"
+. require-dependencies curl installer
+
+PKG_URL="https://s3.amazonaws.com/downloads.getcloudapp.com/mac/latest/CloudApp.pkg"
+
+curl -fsSL --max-redirs 1 -o CloudApp.pkg $PKG_URL
+
+echo "Installing CloudApp..."
+# Target is a device, not a path
+sudo installer -pkg CloudApp.pkg -target /
+

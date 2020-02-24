@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+SCRIPT_PATH="$( cd "$(dirname "$0")" ; pwd -P )"
+cd $SCRIPT_PATH
+
+. get-confirmation "rbenv"
+. require-dependencies brew
+
+brew install rbenv
+
+RBENV_BASHRC="$(cat ~/.bashrc | grep 'rbenv init \-')"
+RBENV_BASH_PROFILE="$(cat ~/.bash_profile | grep 'rbenv init \-')"
+
+# lol check both at the same time
+if [[ -z "$RBENV_BASHRC$RBENV_BASH_PROFILE" ]]; then
+  echo "Adding rbenv init to bash profile"
+  echo "$(rbenv init 2>&1)" >> ~/.bash_profile
+fi
+
+. require-dependencies quiet curl
+curl -fsSL https://github.com/rbenv/rbenv-installer/raw/master/bin/rbenv-doctor | bash
