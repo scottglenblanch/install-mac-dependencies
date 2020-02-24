@@ -3,6 +3,6 @@
 brew update
 brew install pyenv
 
-exec "$SHELL"
+source ~/.bashrc
 
 pyenv install 2.7.8

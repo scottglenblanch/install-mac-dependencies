@@ -18,9 +18,16 @@ export NVM_DIR="$HOME/.nvm" && (
   git checkout `git describe --abbrev=0 --tags --match "v[0-9]*" $(git rev-list --tags --max-count=1)`
 ) && \. "$NVM_DIR/nvm.sh"
 
+
+echo '
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+' >> ~/.bashrc
+
+source ~/.bashrc
+
 # install node versions
 for NODE_VERSION in ${NODE_VERSION_LIST[@]}
 do
     nvm install ${NODE_VERSION}
 done
-

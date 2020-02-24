@@ -1,23 +1,8 @@
 #!/bin/bash
+SCRIPT_PATH="$( cd "$(dirname "$0")" ; pwd -P )"
+INSTALL_DEPENDENCY_DIR="${SCRIPT_PATH}/install-dependency"
 
-source ./install-brew
-
-# languages
-source ./install-python
-source ./install-java
-source ./install-node
-source ./install-rbenv
-
-# java web tools
-source ./install-maven
-
-# frameworks
-source ./install-android
-
-# tools
-source ./install-hammerspoon
-source ./install-spectacle
-source ./install-cloudapp
-
-# editors
-source ./install-atom
+for INSTALL_SCRIPT in $(ls ${INSTALL_DEPENDENCY_DIR});
+do
+  source "${INSTALL_DEPENDENCY_DIR}/${INSTALL_SCRIPT}"
+done
