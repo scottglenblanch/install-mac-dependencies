@@ -1,0 +1,35 @@
+#!/bin/bash
+export PATH="$HOME/.jenv/bin:$PATH"
+
+JAVA_VERSION_LIST=()
+JAVA_VERSION_LIST+=('adoptopenjdk8')
+JAVA_VERSION_LIST+=('adoptopenjdk9')
+JAVA_VERSION_LIST+=('adoptopenjdk10')
+JAVA_VERSION_LIST+=('adoptopenjdk11')
+JAVA_VERSION_LIST+=('adoptopenjdk12')
+JAVA_VERSION_LIST+=('adoptopenjdk13')
+
+
+# brew tap
+brew tap AdoptOpenJDK/openjdk
+
+# jenv
+brew install jenv
+
+# install via brew
+for JAVA_VERSION in ${JAVA_VERSION_LIST[@]};
+do
+    brew cask install ${JAVA_VERSION}
+done
+
+
+echo 'export PATH="$HOME/.jenv/bin:$PATH"' >> ~/.bashrc
+echo 'eval "$(jenv init -)"' >> ~/.bashrc
+
+# setup jenv
+cd /Library/Java/JavaVirtualMachines/; ls | xargs -I {} jenv add /Library/Java/JavaVirtualMachines/{}/Contents/Home
+
+# set default
+jenv global 13.0
+
+jenv enable-plugin export

@@ -1,0 +1,13 @@
+#!/bin/bash
+SCRIPT_PATH="$( cd "$(dirname "$0")" ; pwd -P )"
+INSTALL_DEPENDENCY_DIR="${SCRIPT_PATH}/install-dependency"
+
+# install brew first
+source "${INSTALL_DEPENDENCY_DIR}/install-brew"
+
+# install all dependencies
+for INSTALL_SCRIPT in $(ls ${INSTALL_DEPENDENCY_DIR});
+do
+  source "${INSTALL_DEPENDENCY_DIR}/${INSTALL_SCRIPT}"
+done
+
