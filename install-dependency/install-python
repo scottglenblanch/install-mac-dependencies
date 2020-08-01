@@ -5,4 +5,6 @@ brew install pyenv
 
 source ~/.bashrc
 
+echo -e 'if command -v pyenv 1>/dev/null 2>&1; then\n  eval "$(pyenv init -)"\nfi' >> ~/.bash_profile
+
 pyenv install 3.8.5
