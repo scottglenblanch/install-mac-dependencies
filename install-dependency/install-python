@@ -5,4 +5,4 @@ brew install pyenv
 
 source ~/.bashrc
 
-pyenv install 2.7.8
+pyenv install 3.8.5
