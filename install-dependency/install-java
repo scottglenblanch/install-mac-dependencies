@@ -8,7 +8,7 @@ JAVA_VERSION_LIST+=('adoptopenjdk10')
 JAVA_VERSION_LIST+=('adoptopenjdk11')
 JAVA_VERSION_LIST+=('adoptopenjdk12')
 JAVA_VERSION_LIST+=('adoptopenjdk13')
-
+JAVA_VERSION_LIST+=('adoptopenjdk14')
 
 # brew tap
 brew tap AdoptOpenJDK/openjdk
