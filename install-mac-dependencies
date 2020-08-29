@@ -1,0 +1,117 @@
+#!/bin/bash
+
+# ==============================
+# - Optional Input Variables
+# - --custom-install -> CUSTOM_INSTALL
+# ==============================
+
+URL_TO_SITE_HAS_FILE_LIST_INFO=""
+BASE_URL_RAW=""
+CUSTOM_INSTALL="" # optional input
+FILE_NAME_LIST=()
+CHOSEN_APPS_TO_INSTALL_LIST=()
+
+format_file_name_to_raw_url() {
+  FILE_NAME="${1}"
+
+  echo "${BASE_URL_RAW}/${FILE_NAME}"
+}
+
+format_line_to_be_file_name() {
+  STRING_TO_REMOVE_LIST=()
+  STRING_TO_REMOVE_LIST+=('</a></span>')
+  STRING_TO_REMOVE_LIST+=('>')
+  #must be double quotes with escape for some reason
+  STRING_TO_REMOVE_LIST+=("\"")
+
+  LINE="${1}"
+
+  for STRING_TO_REMOVE in "${STRING_TO_REMOVE_LIST[@]}";
+  do
+    LINE=${LINE/"${STRING_TO_REMOVE}"/}
+  done
+
+  echo "${LINE}"
+}
+
+install_individual_app() {
+  FILE_NAME="${1}"
+  DOWNLOAD_URL="$(format_file_name_to_raw_url "${FILE_NAME}")"
+
+#  curl "${DOWNLOAD_URL}" | bash
+}
+
+install_chosen_apps() {
+  for FILE_NAME in "${CHOSEN_APPS_TO_INSTALL_LIST[@]}";
+  do
+    output_download_message "${FILE_NAME}"
+    install_individual_app "${FILE_NAME}"
+  done
+}
+
+output_download_message() {
+  FILE_NAME="${1}"
+  APP_NAME="${FILE_NAME/install-/}"
+  DOWNLOAD_URL="$(format_file_name_to_raw_url "${FILE_NAME}")"
+
+  echo "===================="
+  echo "Installing ${APP_NAME}"
+  echo "Installing via file ${FILE_NAME}"
+  echo "The raw file location is at ${DOWNLOAD_URL}"
+  echo "===================="
+  echo ""
+  echo ""
+  echo ""
+}
+
+set_chosen_apps_to_install_list() {
+  if [ -z "${CUSTOM_INSTALL}" ];
+  then
+    set_chosen_apps_to_install_list_default
+  else
+    set_chosen_apps_to_install_list_from_custom_install
+  fi
+}
+
+set_chosen_apps_to_install_list_default() {
+  CHOSEN_APPS_TO_INSTALL_LIST=()
+
+  for INSTALL_NAME in "${FILE_NAME_LIST[@]}";
+  do
+    CHOSEN_APPS_TO_INSTALL_LIST+=("$INSTALL_NAME")
+  done
+}
+
+set_chosen_apps_to_install_list_from_custom_install() {
+  CHOSEN_APPS_TO_INSTALL_LIST=()
+
+  for INSTALL_NAME in ${CUSTOM_INSTALL};
+  do
+    CHOSEN_APPS_TO_INSTALL_LIST+=("${INSTALL_NAME}")
+  done
+}
+
+set_file_name_list() {
+  for LINE in $(curl "${URL_TO_SITE_HAS_FILE_LIST_INFO}" | grep -oh '">install-.*</a></span>');
+  do
+    FILE_NAME_LIST+=("$(format_line_to_be_file_name "${LINE}")")
+  done
+}
+
+set_optional_vars() {
+  # may set CUSTOM_INSTALL
+  source /dev/stdin <<<"$(curl https://raw.githubusercontent.com/scottglenblanch/bash-argument-parser/main/src/arg-parser.sh)" $@
+}
+
+set_vars() {
+  URL_TO_SITE_HAS_FILE_LIST_INFO="https://github.com/scottglenblanch/install-mac-dependencies/tree/main/install-dependency"
+  BASE_URL_RAW="https://raw.githubusercontent.com/scottglenblanch/install-mac-dependencies/main/install-dependency"
+
+  set_file_name_list
+  set_optional_vars "$@"
+
+  set_chosen_apps_to_install_list
+}
+
+set_vars "$@"
+install_chosen_apps
