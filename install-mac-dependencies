@@ -38,7 +38,7 @@ install_individual_app() {
   FILE_NAME="${1}"
   DOWNLOAD_URL="$(format_file_name_to_raw_url "${FILE_NAME}")"
 
-#  curl "${DOWNLOAD_URL}" | bash
+ curl "${DOWNLOAD_URL}" | bash
 }
 
 install_chosen_apps() {
