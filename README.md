@@ -1,4 +1,4 @@
-# install-mac-dependencies
+# Install Mac Dependencies
 
 ## Run From Terminal Without Downloading Repo
 
