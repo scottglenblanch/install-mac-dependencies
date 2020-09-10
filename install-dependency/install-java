@@ -30,6 +30,6 @@ echo 'eval "$(jenv init -)"' >> ~/.bashrc
 cd /Library/Java/JavaVirtualMachines/; ls | xargs -I {} jenv add /Library/Java/JavaVirtualMachines/{}/Contents/Home
 
 # set default
-jenv global 13.0
+jenv global 14.0
 
 jenv enable-plugin export
