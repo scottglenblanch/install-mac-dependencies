@@ -25,11 +25,10 @@ done
 
 echo 'export PATH="$HOME/.jenv/bin:$PATH"' >> ~/.bashrc
 echo 'eval "$(jenv init -)"' >> ~/.bashrc
+echo 'jenv enable-plugin export' >> ~/.bashrc
 
 # setup jenv
 cd /Library/Java/JavaVirtualMachines/; ls | xargs -I {} jenv add /Library/Java/JavaVirtualMachines/{}/Contents/Home
 
 # set default
 jenv global 14.0
-
-jenv enable-plugin export
