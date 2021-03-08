@@ -19,7 +19,7 @@ brew install jenv
 # install via brew
 for JAVA_VERSION in ${JAVA_VERSION_LIST[@]};
 do
-    brew cask install ${JAVA_VERSION}
+    brew install --cask ${JAVA_VERSION}
 done
 
 
