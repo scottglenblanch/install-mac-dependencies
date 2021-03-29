@@ -34,19 +34,33 @@ format_line_to_be_file_name() {
   echo "${LINE}"
 }
 
-install_individual_app() {
-  FILE_NAME="${1}"
-  DOWNLOAD_URL="$(format_file_name_to_raw_url "${FILE_NAME}")"
-
- curl "${DOWNLOAD_URL}" | bash
-}
-
 install_chosen_apps() {
   for FILE_NAME in "${CHOSEN_APPS_TO_INSTALL_LIST[@]}";
   do
     output_download_message "${FILE_NAME}"
     install_individual_app "${FILE_NAME}"
   done
+}
+
+install_individual_app() {
+  FILE_NAME="${1}"
+  DOWNLOAD_URL="$(format_file_name_to_raw_url "${FILE_NAME}")"
+
+  install_from_url_text_using_bash "${DOWNLOAD_URL}"
+}
+
+install_mac_package_manager(){
+
+  DOWNLOAD_URL="https://raw.githubusercontent.com/scottglenblanch/install-mac-dependencies/main/install-dependency/install-hammerspoon"
+  
+  install_from_url_text_using_bash "${DOWNLOAD_URL}"
+}
+
+install_from_url_text_using_bash() {
+
+  DOWNLOAD_URL="${1}"
+
+  curl "${DOWNLOAD_URL}" | bash
 }
 
 output_download_message() {
@@ -114,4 +128,5 @@ set_vars() {
 }
 
 set_vars "$@"
+install_mac_package_manager
 install_chosen_apps
