@@ -51,7 +51,7 @@ install_individual_app() {
 
 install_mac_package_manager(){
 
-  DOWNLOAD_URL="https://raw.githubusercontent.com/scottglenblanch/install-mac-dependencies/main/install-dependency/install-hammerspoon"
+  DOWNLOAD_URL="https://raw.githubusercontent.com/scottglenblanch/install-mac-dependencies/main/install-dependency/install-hombrew"
   
   install_from_url_text_using_bash "${DOWNLOAD_URL}"
 }
