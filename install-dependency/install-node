@@ -10,6 +10,7 @@ NODE_VERSION_LIST+=('9')
 NODE_VERSION_LIST+=('10')
 NODE_VERSION_LIST+=('12')
 NODE_VERSION_LIST+=('13')
+NODE_VERSION_LIST+=('14')
 
 # install nvm
 export NVM_DIR="$HOME/.nvm" && (
