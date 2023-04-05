@@ -1,28 +1,11 @@
 #!/bin/bash
-export PATH="$HOME/.jenv/bin:$PATH"
 
-JAVA_VERSION_LIST=()
-JAVA_VERSION_LIST+=('openjdk@11')
-JAVA_VERSION_LIST+=('openjdk@17')
-JAVA_VERSION_LIST+=('openjdk@19')
+# install sdk
 
+curl -s "https://get.sdkman.io" | bash
 
-# jenv
-brew install jenv
+echo 'source "$HOME/.sdkman/bin/sdkman-init.sh"' >> ~/.bashrc
 
-# install via brew
-for JAVA_VERSION in ${JAVA_VERSION_LIST[@]};
-do
-    brew install ${JAVA_VERSION}
-done
+source "$HOME/.sdkman/bin/sdkman-init.sh"
 
-
-echo 'export PATH="$HOME/.jenv/bin:$PATH"' >> ~/.bashrc
-echo 'eval "$(jenv init -)"' >> ~/.bashrc
-echo 'jenv enable-plugin export' >> ~/.bashrc
-
-# setup jenv
-cd /opt/homebrew/opt; ls | grep openjdk@ | xargs -I {} jenv add /opt/homebrew/opt/{}
-
-# set default
-jenv global 17.0
+sdk install java
