@@ -2,16 +2,10 @@
 export PATH="$HOME/.jenv/bin:$PATH"
 
 JAVA_VERSION_LIST=()
-JAVA_VERSION_LIST+=('adoptopenjdk8')
-JAVA_VERSION_LIST+=('adoptopenjdk9')
-JAVA_VERSION_LIST+=('adoptopenjdk10')
-JAVA_VERSION_LIST+=('adoptopenjdk11')
-JAVA_VERSION_LIST+=('adoptopenjdk12')
-JAVA_VERSION_LIST+=('adoptopenjdk13')
-JAVA_VERSION_LIST+=('adoptopenjdk14')
+JAVA_VERSION_LIST+=('openjdk@11')
+JAVA_VERSION_LIST+=('openjdk@17')
+JAVA_VERSION_LIST+=('openjdk@19')
 
-# brew tap
-brew tap AdoptOpenJDK/openjdk
 
 # jenv
 brew install jenv
@@ -19,7 +13,7 @@ brew install jenv
 # install via brew
 for JAVA_VERSION in ${JAVA_VERSION_LIST[@]};
 do
-    brew install --cask ${JAVA_VERSION}
+    brew install ${JAVA_VERSION}
 done
 
 
